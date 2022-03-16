@@ -1,6 +1,6 @@
 package sk.stuba.fei.uim.oop.zvierata;
 
-public abstract class Zviera implements Comparable<Zviera> {
+public abstract class Zviera {
     protected final String meno;
 
     public Zviera(String meno) {
@@ -16,11 +16,6 @@ public abstract class Zviera implements Comparable<Zviera> {
 
     public String getMeno() {
         return meno;
-    }
-
-    @Override
-    public int compareTo(Zviera o) {
-        return this.meno.compareTo(o.getMeno());
     }
 
     @Override
