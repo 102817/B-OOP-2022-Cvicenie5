@@ -11,4 +11,8 @@ public class Macka extends Zviera {
         System.out.println("mnau mnau");
     }
 
+    @Override
+    public int compareTo(Zviera o) {
+        return 0;
+    }
 }

@@ -11,4 +11,8 @@ public class Pes extends Zviera {
         System.out.println("hau hau");
     }
 
+    @Override
+    public int compareTo(Zviera o) {
+        return 0;
+    }
 }
