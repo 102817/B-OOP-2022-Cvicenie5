@@ -1,6 +1,6 @@
 package sk.stuba.fei.uim.oop.zvierata;
 
-public class NotPesException extends Exception {
+public class NotPesException extends Exception {   //dedi z vynimky
     public NotPesException() {
     }
 

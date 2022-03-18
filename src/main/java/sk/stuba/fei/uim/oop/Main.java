@@ -1,8 +1,6 @@
 package sk.stuba.fei.uim.oop;
 
-import sk.stuba.fei.uim.oop.zvierata.Macka;
-import sk.stuba.fei.uim.oop.zvierata.Pes;
-import sk.stuba.fei.uim.oop.zvierata.Zviera;
+import sk.stuba.fei.uim.oop.zvierata.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,35 +9,35 @@ import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        List<Zviera> zveri = new ArrayList<>(List.of(new Pes("Dunčo"), new Macka("Murko"),
-                new Pes("Luna"), new Macka("Garfield")));
+        ArrayList<Zviera> zveri = new ArrayList<>();
 
-        zveri.stream().forEach(System.out::println);
+        zveri.add(new Pes("Dunco"));
+        zveri.add(new Macka("Murko"));
 
-        List<Zviera> zveri2 = zveri.stream()
-                .collect(Collectors.toList());
+        for (var zver : zveri) {  //prejdeme polom
+            System.out.println("pred try");
+            try {
+                kontrola(zver);
+                System.out.println("po try");
+            } catch (NotPesException e) {
+                System.out.println("catch pes");
+                System.out.println(e.getMessage());
+            } catch (NotMackaException e) {
+                System.out.println("catch macka");
+                System.out.println(e.getMessage());
+            }finally {
+                System.out.println("finally");
+            }
+            System.out.println("po");
+            System.out.println("------");
+        }
+    }
 
-        zveri2 = zveri2.stream()
-                .sorted((o1, o2) -> o1.getMeno().compareTo(o2.getMeno()))
-                .collect(Collectors.toList());
-        System.out.println("---");
-        zveri2.stream().forEach(System.out::println);
-        System.out.println("---");
-
-        String[] mena = zveri2.stream()
-                .map(Zviera::getMeno)
-                .toArray(String[]::new);
-        Stream.of(mena).forEach(System.out::println);
-        System.out.println("---");
-
-        List<Pes> psi = zveri.stream()
-                .filter(zviera -> zviera instanceof Pes)
-                .map(pes -> (Pes) pes)
-                .collect(Collectors.toList());
-        psi.forEach(System.out::println);
-
-        System.out.println("---");
-        List<Macka> macky = Stream.generate(() -> new Macka("Murko")).limit(5).collect(Collectors.toList());
-        System.out.println(macky);
+    private static void kontrola(Zviera zver) throws NotPesException, NotMackaException{
+        if(zver instanceof Pes){
+            throw new NotMackaException("Nie je to macka");
+        }else {
+            throw new NotPesException("to nie je pes");
+        }
     }
 }
